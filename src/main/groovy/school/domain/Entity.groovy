@@ -16,6 +16,28 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.voodoodyne.jackson.jsog.JSOGGenerator
 
+/*
+
+
+由于每个实体都需要一个ID，我们将创建一个 Entity 超类。
+
+
+
+以下是在图上英文下方添加对应中文翻译后的内容：
+
+- Department（院系 ）
+- CURRICULUM（课程体系 ）
+- Subject（学科/科目 ）
+- TAUGHT_BY（由……教授 ）
+- Teacher（教师 ）
+- TEACHES_CLASS（教授班级 ）
+- Class（班级 ）
+- ENROLLED（已注册/已选课 ）
+- Student（学生 ）
+- BUDDY（伙伴/学伴 ）
+- StudyBuddy（学习伙伴 ）
+- COURSE（课程 ）
+ */
 //@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 @JsonIdentityInfo(generator = JSOGGenerator.class)
 abstract class Entity {

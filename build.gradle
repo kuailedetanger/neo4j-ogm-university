@@ -1,6 +1,7 @@
 buildscript {
     repositories {
-        jcenter()
+        mavenCentral()
+        gradlePluginPortal()
     }
     dependencies {
         classpath "io.ratpack:ratpack-gradle:1.6.1"
@@ -16,7 +17,10 @@ apply plugin: "idea"
 apply plugin: 'asset-pipeline'
 
 repositories {
-    jcenter()
+    // 添加这两行
+    mavenCentral()
+    gradlePluginPortal()
+
 }
 
 configurations.all {

@@ -16,15 +16,37 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.neo4j.ogm.annotation.Relationship
 
+/*
+以下是在图上英文下方添加对应中文翻译后的内容：
+
+- Department（院系 ）
+- CURRICULUM（课程体系 ）
+- Subject（学科/科目 ）
+- TAUGHT_BY（由……教授 ）
+- Teacher（教师 ）
+- TEACHES_CLASS（教授班级 ）
+- Class（班级 ）
+- ENROLLED（已注册/已选课 ）
+- Student（学生 ）
+- BUDDY（伙伴/学伴 ）
+- StudyBuddy（学习伙伴 ）
+- COURSE（课程 ）
+ */
 class Subject extends Entity {
 
     @JsonProperty("name")
     String name
 
+    /**
+     * （Department 院系）-[CURRICULUM 课程体系 ]->(Subject 科目)
+     */
     @JsonIgnore
     @Relationship(type = "CURRICULUM", direction = Relationship.INCOMING)
     Department department
 
+    /**
+     * (Subject 科目)-[TAUGHT_BY 由……教授 ]->(Teacher教师)
+     */
     @Relationship(type = "TAUGHT_BY")
     Set<Teacher> teachers
 

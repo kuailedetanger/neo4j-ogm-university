@@ -14,17 +14,33 @@ package school.domain
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.neo4j.ogm.annotation.Relationship
 
+/**
+ * Our college will contain departments 系
+ *
+ */
 class Department extends Entity {
 
     @JsonProperty("name")
     String name
 
+    /**
+     * 每个系的老师
+     */
     @Relationship(type = "DEPARTMENT_MEMBER")
     Set<Teacher> teachers
 
+    /**
+     * 一位teacher教授的各种 学科
+     * @Relationship 注解 默认情况下，方向假定为 OUTGOING: (Department 院系 )-[CURRICULUM 课程体系 ]->(Subject 学科/科目)
+     *
+     *
+     */
     @Relationship(type = "CURRICULUM")
     Set<Subject> subjects
 
+    /**
+     * Neo4j-OGM 还需要一个公共的无参数构造函数，以便能够从我们所有带注释的实体构造对象。我们将确保所有实体都有这样一个构造函数。
+     */
     Department() {
         this.teachers = new HashSet<>()
         this.subjects = new HashSet<>()

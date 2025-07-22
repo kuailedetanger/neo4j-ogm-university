@@ -16,6 +16,9 @@ import org.neo4j.ogm.annotation.RelationshipEntity
 import org.neo4j.ogm.annotation.StartNode
 import org.neo4j.ogm.annotation.typeconversion.DateLong
 
+/**
+ * 登记关系
+ */
 @RelationshipEntity(type = "ENROLLED")
 class Enrollment {
 
@@ -27,6 +30,9 @@ class Enrollment {
     @EndNode
     Course course
 
+    /**
+     * 登记时间
+     */
     @DateLong
     Date enrolledDate
 
