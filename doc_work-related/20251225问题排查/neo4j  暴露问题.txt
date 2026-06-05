@@ -1,0 +1,15 @@
+sofa接口
+
+服务上游调用sofa接口 neo4jServceA ,
+neo4jServceA 处理流程
+1：  参数校验
+2：  获取参数，里面有查询逻辑A,B,C,D,E, 使用线程池去执行 A,B,C,D,E 子任务,使用方法 CompletableFuture.supplyAsync()
+3:  A,B,C,D,E 子任做查询任务，使用Future.get(15,timeunit.seconds) 获取任务结果，该方法已添加try-catch块捕获TimeoutException/ExecutionException
+4： 把获取到的结果组装成一个大的对象返回。
+5： 使用切面： a.记录 请求的入参和执行时间在表1，  b:使用表2 记录查询的返回结果
+6： 线程池配置： corePoolSize=8 , maxinumPoolSize=14 ,keyAliveTime=10, TimeUnit.SECONDS,  new LinkedBlockingDeque<>(10000), Excutors.defaultThreadFactory(), new TreadhPoolExcutor.CallerRunPolicy
+现象：
+1.发现 表1记录的结果存在执行时间小雨50ms，这个是明显没有调用neo4jServceA的方法，表2的记录结果也是空的
+2.15000万的调用，有6000笔存在现象1的结果。
+
+帮我分析出现上面的出现原因和排查的方向。
